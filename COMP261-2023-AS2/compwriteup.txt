@@ -1,0 +1,58 @@
+greenthom - 300536064
+
+COMP261 - Assignment 2
+
+All files completed:
+- Graph.java
+- AStar.java
+- PathItem.java
+- Components.java
+- ArticulationPoints.java
+
+Have implemented Task 1 - 4
+
+Methods with explanation:
+
+Have implemented a collection of all the stops and Edges in the graph. Have also created a collection of all forwardEdges and backwardEdges on each stop as well as neighbours.
+
+- Have implemented the createAndConnectEdges method: 
+Iterates through each line in the list which gets a list of stops and times from each stop on the line. Then iterates through the stops on the line so that it creates an edge object that connects the current stop to the next and adds the edge to the set. The edge object is created from the start and end stop objects. It adds the edge to the set of edges which is added to the forward and backward edges
+
+- Have implemented the computeNeighbours method:
+For each stop is gets the list of edges that connects it to the neighbouring stop through the forward edges. Then iterates through list of edges and adds the neighbouring stop to the current stop list. Then gets list of edge objects and connects it to the neighbouring stop through backward edges then iterates through list of edges and adds the neighbouring stop to the current stop list.
+
+Have implemented the recomputeWalkingEdges method:
+Iterates through each stops in the list and other stops. For each each pair of stops it then checks if the distance between them is <= to the walkingDistance. If the distance between the stops is within walking distance, it creates a new edge object with the start and end stops and the distance between them. Edge is then added to a set of edges and added to forwardEdges at the start stop and backwardEdges at the end stop.
+
+Have implemented the findShortestPath method: 
+The method is based on the Dijkstra’s algorithm, which finds the shortest path between the start-node and the other nodes on the graph. It takes in two stops (start and goal) and a parameter if the algorithm should go for time or distance. It checks if the start and goal are null which would return null. Uses a priority queue to store the current best paths. The estimated total cost is calculated using the heuristic function and the edgeCost of the remaining path to the goal. It adds the start stop to the queue and as estimated total cost. It enters the loop and continues until the queue is empty. It each iteration it extracts the path with the lowest cost from the queue. If the current stop is the goal it then uses back pointers stored in the back pointer map which maps each stop to the edge that is used to reach it from the previous stop. If stop is visited it then goes to next iteration, if not it adds the current stop to the visited set and then considers each outgoing edge from the current and calculates the cost of the new path which would be added to the queue. Continues until goal stop is found or queue is empty.
+
+Implemented findComponents method:
+Resets the subGraphIds of all the stops in the graph. Initialises a list of stops on the nodeList and a set of visited stops. For each unvisited stop the forwardVisit method is called to do a depth-first search of all stops reachable and adds it to the node list. Once the forward visit method has completed for all stops reachable the stop is added to the front of the node list. For each node in reverse order it calls the backwardVisit method to perform a depth first search of all the stops that are reachable. Any stop not assigned to the subgraph after the backward visit method is assigned to a new subgraph. The graph is updated with the number found.
+
+Implemented PathItem method:
+Stores information about the path. Current stop, path taken, cost, and estimated cost. Compare method to allow the instances to be compared to each other based on the estimated cost. Allows the priority queue to create an order of increasing estimated costs.
+
+Implemented findArticulationPoints method:
+Return collection of artPoints in an undirected graph without walking edges. Initialises set of articulation points and map of depths. Loops through all stops in the graph to check is each stop has been visited. If it has not been visited it calls the recurseArticulationPoints method which recursively visits the neighbours of the stops and their neighbours updating the depth of each node. The recurseArticulationPoints method uses depth first search to explore the graph for each visited node. It updates the depth in the map and checks if the stop is an articulation point. It returns the lowest depth it can reach from the node. It returns the articulationPoints set which returns the points found in the graph. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
